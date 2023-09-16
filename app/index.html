@@ -1,0 +1,50 @@
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<head>
+    <title id="Godot Launcher">Godot Launcher</title>
+    <style>
+        span {
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        #path {
+            display: inline-block;
+            width: 200px;
+            height: 20px;
+            border: 2px solid black;
+            padding: 2px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            vertical-align: middle;
+        }
+
+        button {
+            display: inline-block;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <span>Godot Dir:</span>
+        <span id="path"></span>
+        <button onclick="selectFolder()">Select Folder</button>
+    </div>
+    <script>
+        function selectFolder() {
+            console.log('selectFolder');
+            const { ipcRenderer } = require("electron");
+
+            ipcRenderer.send('selectFolder')
+            ipcRenderer.on('downloadfile_result', (event, arg) => {
+                console.log(arg)
+            })
+        }
+    </script>
+</body>
+
+</html>
